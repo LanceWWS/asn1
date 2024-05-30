@@ -1,3 +1,20 @@
+// Function to validate input
+function validateInput(input) {
+  const regex = /^[0-9]*(?:\.\d{1,2})?$/; // This regex allows only positive numbers and up to two decimal places
+  if (!regex.test(input) || input <= 0) {
+      alert("Invalid input. Please enter a positive number without any letters.");
+      return false;
+  }
+  return true;
+}
+
+// Add event listeners to the input fields
+document.querySelectorAll('input[type="number"]').forEach(input => {
+  input.addEventListener('input', (event) => {
+      validateInput(event.target.value);
+  });
+});
+
 // Function to calculate weighted average
 function calculateWeightedAverage() {
     const table = document.getElementById("table");
@@ -5,6 +22,9 @@ function calculateWeightedAverage() {
     let totalWeight = 0;
   
     for (let i = 1; i < table.rows.length; i++) { 
+      if (!validateInput(weightInput) || !validateInput(gradeInput) || !validateInput(maxGradeInput)) {
+        continue; // Skip this iteration if the input is invalid
+    }
       const weight = parseFloat(table.rows[i].cells[2].querySelector("input").value) || 0;
       const grade = parseFloat(table.rows[i].cells[3].querySelector("input[name='grade']").value) || 0;
       const maxGrade = parseFloat(table.rows[i].cells[3].querySelector("input[name='maxgrade']").value) || 0;
@@ -53,10 +73,9 @@ function calculateWeightedAverage() {
         '<input type="number" name="grade" value="">/<input type="number" name="maxgrade" value="">',
     ].forEach(content => row.insertCell().innerHTML = content);
 
-    // Create and add the percent cell with initial content
     const percentCell = row.insertCell();
     percentCell.className = "percent";
-    percentCell.textContent = ""; // Set initial content to empty string
+    percentCell.textContent = ""; 
 });
   
   // Event delegation for input events on the entire table
