@@ -15,8 +15,8 @@ function calculateWeightedAverage() {
         totalWeight += weight;
       }
     }
-  
-    return totalWeight !== 0 ? (totalWeightedGrade / totalWeight).toFixed(2) : "N/A"; 
+    const resultsParagraph = document.querySelector('.results');
+    resultsParagraph.textContent = totalWeight !== 0 ? "Total weighted grade: " + (totalWeightedGrade / totalWeight).toFixed(2) + "%" : "N/A";
   }
   
   // Function to calculate mean average
@@ -36,7 +36,8 @@ function calculateWeightedAverage() {
       }
     }
   
-    return validGrades > 0 ? (totalPercentage / validGrades).toFixed(2) : "N/A";
+    const resultsParagraph = document.querySelector('.results');
+    resultsParagraph.textContent = validGrades > 0 ? "Total mean grade: " + (totalPercentage / validGrades).toFixed(2) + "%" : "N/A";
   }
   
   // Event listener for "Add Row" button
@@ -77,9 +78,9 @@ function calculateWeightedAverage() {
   
   // Event listeners for Weighted and Mean buttons
   document.querySelector(".weighted").addEventListener("click", () => {
-    alert("Weighted Average: " + calculateWeightedAverage() + "%");
+    calculateWeightedAverage();
   });
   
   document.querySelector(".mean").addEventListener("click", () => {
-    alert("Mean Average: " + calculateMeanAverage() + "%");
+    calculateMeanAverage();
   });
