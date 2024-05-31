@@ -22,9 +22,6 @@ function calculateWeightedAverage() {
     let totalWeight = 0;
   
     for (let i = 1; i < table.rows.length; i++) { 
-      if (!validateInput(weightInput) || !validateInput(gradeInput) || !validateInput(maxGradeInput)) {
-        continue; // Skip this iteration if the input is invalid
-    }
       const weight = parseFloat(table.rows[i].cells[2].querySelector("input").value) || 0;
       const grade = parseFloat(table.rows[i].cells[3].querySelector("input[name='grade']").value) || 0;
       const maxGrade = parseFloat(table.rows[i].cells[3].querySelector("input[name='maxgrade']").value) || 0;
